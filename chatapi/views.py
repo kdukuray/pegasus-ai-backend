@@ -79,3 +79,10 @@ def get_chat_thread_messages(request, chat_thread_id):
     all_messages_serialized = serializers.MessageSerializer(all_messages, many=True).data
     return Response({"messages": all_messages_serialized}, status=status.HTTP_200_OK)
 
+
+
+@api_view(["GET"])
+def get_chat_threads(request):
+    chat_threads = models.ChatThread.objects.all()
+    threads_serialized = serializers.ChatThreadSerializer(chat_threads, many=True).data
+    return Response({"threads": threads_serialized}, status=status.HTTP_200_OK)
